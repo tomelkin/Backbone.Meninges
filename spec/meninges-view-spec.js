@@ -190,6 +190,20 @@ describe("meninges views", function () {
       });
     });
 
+    describe('when there is whitespace at the start or end of the value', function() {
+
+      it('trims whitespace from start of the value', function() {
+          $("input[name='title']").val(" Out in the Big White Space").trigger("blur");
+          expect(book.get('title')).toEqual("Out in the Big White Space");
+      });
+
+      it('trims whitespace from end of the value', function() {
+          $("input[name='title']").val(" Space: The Final Frontier ").trigger("blur");
+          expect(book.get('title')).toEqual("Space: The Final Frontier");
+      });
+    });
+
+
     describe('original model', function () {
       var originalModel;
 

@@ -1,6 +1,10 @@
 Backbone.MeningesView = {
   extend: function (o) {
 
+    var trimString = function(string) {
+      return string.replace(/^\s+|\s+$/g,"");
+    };
+
     var findNextModel = function (startingModel, pathElement) {
       if (pathElement.indexOf(":") === -1) {
         return startingModel.get(pathElement);
@@ -34,6 +38,8 @@ Backbone.MeningesView = {
         currentModel = findNextModel(currentModel, pathItems[i]);
         originalModel = findNextModel(originalModel, pathItems[i]);
       }
+
+      if (_(value).isString()) { value = trimString(value); }
 
       var newValueHash = {};
       var oldValue = currentModel.get(_(pathItems).last());
